@@ -1,34 +1,30 @@
-NAME = phonebook
+include makefile.files
 
-SRC_DIR = src
-OBJ_DIR = objs
-SRCS = $(addprefix src/, Contact.cpp)
-OBJ = ${addprefix ${OBJ_DIR}/, ${SRCS:.cpp=.o}}
-DEPS = ${OBJ:.o=.d}
+NAME = myphonebook
 
 INCLUDES = -Iincludes
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -g
 
-CC = c++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD
-DEBUG = -g
+CC = g++
+RM = rm -rf
 
-all: $(NAME)
+all : ${NAME}
 
-$(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp Makefile
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CPPFLAGS) ${DEBUG} ${INCLUDES} -c $< -o $@
+.SECONDEXPANSION:
+${OBJS}: $$(patsubst %.o, %.cpp, $$(subst ${OBJS_DIR}/, ${SRCS_DIR}/, $${@}))
+	@mkdir -p ${OBJS_DIR}
+	${CC} ${CFLAGS} ${INCLUDES} -c $< -o $@
 
-$(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME)
+${NAME} : ${OBJS}
+	${CC} ${CFLAGS} $^ -o $@
+clean :
+	${RM} ${OBJS_DIR}
 
-clean:
-	rm -rf ${OBJ} ${OBJ_DIR}
+fclean : clean
+	${RM} ${NAME}
 
-fclean:	clean
-	rm ${NAME}
-
-re:	fclean all
-
-.PHONY: all clean fclean re
+re : fclean all
 
 -include ${DEPS}
+
+.PHONY : re clean fclean all
