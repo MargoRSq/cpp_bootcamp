@@ -1,0 +1,6 @@
+SRCS_DIR = src
+OBJS_DIR = objs
+
+SRCS = tests.cpp Account.cpp
+OBJS = ${addprefix ${OBJS_DIR}/, ${SRCS:.cpp=.o}}
+DEPS = ${OBJS:.o=.d}
