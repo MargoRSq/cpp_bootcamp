@@ -18,6 +18,7 @@ public:
 
       float toFloat(void) const;
       int toInt(void) const;	
+      
 private:
       int m_fixed_int_value;
       static const int m_frac_bits = 8;
