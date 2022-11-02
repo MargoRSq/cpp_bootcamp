@@ -24,5 +24,4 @@ private:
       static const int m_frac_bits = 8;
 };
 
-//Перегрузка оператора вставки хранимого значения в выходной поток
 std::ostream &operator<<(std::ostream &out, const Fixed &value);
