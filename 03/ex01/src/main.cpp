@@ -5,15 +5,13 @@ int main(void)
 {
 	ScavTrap st("Kek");
 	ClapTrap* ptr;
+	ScavTrap* heap_ptr = new ScavTrap("Mda");
 
 	ptr = &st;
-	// ptr = new ScavTrap(st);
-	// std::cout << "delete ptr" << std::endl;
-	// // delete ptr;
-    // std::cout << "after delete ptr" << std::endl;
-	// st.guardGate();virtual 
 	ptr->attack("sada");
 	st.attack("Lol");
+	heap_ptr->guardGate();
 
+	delete heap_ptr;
 	return 0;
 }

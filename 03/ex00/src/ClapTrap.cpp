@@ -5,12 +5,12 @@ ClapTrap::ClapTrap()
 {
 	std::cout << "Default constructor called" << std::endl;
 }
-ClapTrap::ClapTrap(std::string& name)
+ClapTrap::ClapTrap(const std::string& name)
 	: m_name(name), m_hp(10), m_ep(10), m_dmg(0)
 {
 	std::cout << "Only name constructor called" << std::endl;
 }
-ClapTrap::ClapTrap(std::string& name, int hp, int ep, int dmg)
+ClapTrap::ClapTrap(const std::string& name, int hp, int ep, int dmg)
 	: m_name(name), m_hp(hp), m_ep(ep), m_dmg(dmg)
 {
 	std::cout << "All parametres constructor called" << std::endl;
@@ -46,13 +46,13 @@ int ClapTrap::getDMG(void) const { return this->m_dmg; }
 void ClapTrap::attack(const std::string& target)
 {
 	if (this->m_dmg && this->m_ep && this->m_hp)
-		std::cout << "ClapTrap" << this->m_name << "attacks" << target <<
+		std::cout << "[ClapTrap] " << this->m_name << "attacks" << target <<
 		" causing " << this->m_dmg << "points of damage!" << std::endl;
 }
 void ClapTrap::takeDamage(unsigned int amount)
 {
 	if (this->m_hp > (int)amount && this->m_hp > 0)
-		std::cout << "ClapTrap " << this->m_name << " takes " 
+		std::cout << "[ClapTrap]  " << this->m_name << " takes " 
 		<< amount << " damage" << std::endl;
 	{
 		this->m_hp -= amount;
@@ -60,7 +60,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 }
 void ClapTrap::beRepaired(unsigned int amount)
 {
-	std::cout << "ClapTrap " << this->m_name << " repairs " 
+	std::cout << "[ClapTrap]  " << this->m_name << " repairs " 
 	<< amount << " of health points" << std::endl;
 	this->m_hp += amount;
 }

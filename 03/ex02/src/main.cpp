@@ -9,14 +9,10 @@ int main(void)
 	ClapTrap* ptr;
 
 	ptr = &st;
-	// ptr = new ScavTrap(st);
-	// std::cout << "delete ptr" << std::endl;
-	// // delete ptr;
-    // std::cout << "after delete ptr" << std::endl;
-	// st.guardGate();virtual 
 	ptr->attack("sada");
 	st.attack("Lol");
 
-	ft.attack("Kiva");
+	ft.highFivesGuys();
+
 	return 0;
 }

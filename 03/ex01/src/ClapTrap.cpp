@@ -3,36 +3,36 @@
 ClapTrap::ClapTrap()
 	: m_name(""), m_hp(10), m_ep(10), m_dmg(0)
 {
-	std::cout << "ClapTrap Default constructor called" << std::endl;
+	std::cout << "[ClapTrap] Default constructor called" << std::endl;
 }
 ClapTrap::ClapTrap(const std::string& name)
 	: m_name(name), m_hp(10), m_ep(10), m_dmg(0)
 {
-	std::cout << "ClapTrap Only name constructor called" << std::endl;
+	std::cout << "[ClapTrap] Only name constructor called" << std::endl;
 }
 ClapTrap::ClapTrap(const std::string& name, int hp, int ep, int dmg)
 	: m_name(name), m_hp(hp), m_ep(ep), m_dmg(dmg)
 {
-	std::cout << "ClapTrap All parametres constructor called" << std::endl;
+	std::cout << "[ClapTrap] All parametres constructor called" << std::endl;
 }
 ClapTrap::ClapTrap(const ClapTrap &copy)
 	: m_name(copy.getName()), m_hp(copy.getHP()),
 	  m_ep(copy.getEP()), m_dmg(copy.getDMG())
 {
-	std::cout << "ClapTrap Copy constructor called" << std::endl;
+	std::cout << "[ClapTrap] Copy constructor called" << std::endl;
 }
 ClapTrap &ClapTrap::operator=(const ClapTrap &copy)
 {
 	if (this == &copy)
 		return *this;
-	std::cout << "ClapTrap Copy assignment operator called" << std::endl;
+	std::cout << "[ClapTrap] Copy assignment operator called" << std::endl;
 	this->m_name = copy.getName();
 	this->m_hp = copy.getHP();
 	this->m_ep = copy.getEP();
 	this->m_dmg = copy.getDMG();
 	return (*this);
 }
-ClapTrap::~ClapTrap() { std::cout << "ClapTrap Destructor called" << std::endl; }
+ClapTrap::~ClapTrap() { std::cout << "[ClapTrap] Destructor called" << std::endl; }
 
 void ClapTrap::setName(const std::string& value) { this->m_name = value; }
 void ClapTrap::setHP(int value) { this->m_hp = value; }
