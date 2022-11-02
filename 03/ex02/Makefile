@@ -1,11 +1,11 @@
 include makefile.files
 
-NAME = myphonebook
+NAME = fragtrap
 
 INCLUDES = -Iincludes
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -g
 
-CC = c++
+CC = g++
 RM = rm -rf
 
 all : ${NAME}

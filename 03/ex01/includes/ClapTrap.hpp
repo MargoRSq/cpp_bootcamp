@@ -9,7 +9,7 @@ public:
       ClapTrap(const std::string& name, int hp, int ep, int dmg);
       ClapTrap(const ClapTrap &copy);
       ClapTrap &operator=(const ClapTrap &copy);
-      ~ClapTrap();
+      virtual ~ClapTrap();
 
       void setName(const std::string& value);
       void setHP(int value);
