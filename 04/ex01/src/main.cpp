@@ -1,19 +1,31 @@
-#include "ScavTrap.hpp"
+#include "Animal.hpp"
+#include "Dog.hpp"
+#include "Cat.hpp"
 
-
-int main(void)
+int main()
 {
-	ScavTrap st("Kek");
-	ClapTrap* ptr;
+	Cat cat;
+	Dog* dog = new Dog;
 
-	ptr = &st;
-	// ptr = new ScavTrap(st);
-	// std::cout << "delete ptr" << std::endl;
-	// // delete ptr;
-    // std::cout << "after delete ptr" << std::endl;
-	// st.guardGate();virtual 
-	ptr->attack("sada");
-	st.attack("Lol");
+	cat.getBrain()->addIdea("How to ruin the furniture");
+	cat.getBrain()->addIdea("How to eat something");
+	std::cout << cat.getBrain()->getIdeas()[0] << std::endl;
+	std::cout << cat.getBrain()->getIdeas()[1] << std::endl;
+	std::cout << cat.getBrain()->getIdeas()[84] << std::endl;
 
+	dog->getBrain()->addIdea("How to eat owner");
+	std::cout << dog->getBrain()->getIdeas()[0] << std::endl;
+	std::cout << dog->getBrain()->getIdeas()[1] << std::endl;
+	std::cout << dog->getBrain()->getIdeas()[54] << std::endl;
+	delete dog;
+
+	std::cout << "-- subject test --" << std::endl;
+	const Animal* j = new Dog();
+	const Animal* i = new Cat();
+	j->makeSound();
+	i->makeSound();
+	delete j;//should not create a leak
+	delete i;
+	std::cout << "-- subject test --" << std::endl;
 	return 0;
 }
