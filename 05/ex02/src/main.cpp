@@ -2,57 +2,78 @@
 #include <iomanip>
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "AForm.hpp"
 
 int main(void) {
 	{
-		std::cout << "--- TEST 1: Form can't be created " << std::endl;
-		try
-		{
-			Bureaucrat	bill("Bill", 100);
-			Bureaucrat	paul("Paul", 50);
-			Form		argeement1("Agreement 1", 100, 110);
-			Form		argeement2("Agreement 2", 0, 0);
+		std::cout << "--- ShrubberyCreationForm Test " << std::endl;
+		Bureaucrat	boss("The Boss", 1);
+		Bureaucrat	paul("Paul", 150);
+		ShrubberyCreationForm		park("Park");
 
-			std::cout << bill << std::endl;
-			std::cout << paul << std::endl;
-			std::cout << argeement1 << std::endl;
-			std::cout << argeement2 << std::endl;
-
-			std::cout << std::endl << "- Bill recieved Agreement 1:" << std::endl;
-			bill.signForm(argeement1);
-			std::cout << std::endl << "- Paul recieved Agreement 1:" << std::endl;
-			paul.signForm(argeement1);
-			std::cout << std::endl << "- Bill recieved Agreement 2:" << std::endl;
-			bill.signForm(argeement2);
+		std::cout << boss << std::endl;
+		std::cout << paul << std::endl;
+		std::cout << park << std::endl;
+		
+		try {
+			std::cout << std::endl << "- The Boss recieved Agreement:" << std::endl;
+			boss.signForm(park);
+			std::cout << std::endl << "- Paul to execute Agreement:" << std::endl;
+			paul.executeForm(park);
 		}
-		catch(const std::exception& e)
-		{
-			std::cerr << "CAUGHT EXCEPTION: " << e.what() << '\n';
+		catch(const std::exception& e) {
+			std::cerr << "(main) CAUGHT EXCEPTION: " << e.what()  << '\n';
+			try {
+				std::cout << std::endl << "- Boss to execute Agreement:" << std::endl;
+				boss.executeForm(park);
+			}
+			catch(const std::exception& e) {
+				std::cerr << "(main) CAUGHT EXCEPTION: " << e.what() << '\n';
+			}
+			
 		}
 	}
 	{
-		std::cout << "--- TEST 2: Form can't be signed " << std::endl;
+		std::cout << "--- RobotomyRequestForm "<< std::endl;
 		try
 		{
-			Bureaucrat	bill("Bill", 100);
-			Bureaucrat	paul("Paul", 50);
-			Form		argeement2("Agreement 2", 50, 100);
-			Form		argeement3("Agreement 3", 1, 50);
+			Bureaucrat				bill("Bill", 5);
+			RobotomyRequestForm		roboCat("RoboCat");
 
 			std::cout << bill << std::endl;
-			std::cout << paul << std::endl;
-			std::cout << argeement2 << std::endl;
-			std::cout << argeement3 << std::endl;
+			std::cout << roboCat << std::endl;
 
-			std::cout << std::endl << "- Paul recieved Agreement 2:" << std::endl;
-			paul.signForm(argeement2);
-			std::cout << std::endl << "- Paul recieved Agreement 3:" << std::endl;
-			paul.signForm(argeement3);
+			std::cout << std::endl << "- Bill recieved RoboCat form:" << std::endl;
+			bill.signForm(roboCat);
+			for (size_t i = 0; i < 10; i++)
+			{
+				std::cout << std::endl << "- Bill to execute :: " << i << std::endl;
+				bill.executeForm(roboCat);
+			}
 		}
-		catch(const std::exception& e)
-		{
-			std::cerr << "CAUGHT EXCEPTION: " << e.what() << '\n';
+		catch(const std::exception& e) {
+			std::cerr << "(main) CAUGHT EXCEPTION: " << e.what() << '\n';
+		}
+	}
+	{
+		std::cout << "--- PresidentialPardonForm "<< std::endl;
+		try {
+			Bureaucrat					bill("Bill", 5);
+			PresidentialPardonForm		form("Guilty 100500");
+
+			std::cout << bill << std::endl;
+			std::cout << form << std::endl;
+
+			std::cout << std::endl << "- Bill recieved form:" << form.getName() << std::endl;
+			bill.signForm(form);
+			std::cout << std::endl << "- Bill to execute" << std::endl;
+			bill.executeForm(form);
+		}
+		catch(const std::exception& e) {
+			std::cerr << "(main) CAUGHT EXCEPTION: " << e.what() << '\n';
 		}
 	}
 	return 0;

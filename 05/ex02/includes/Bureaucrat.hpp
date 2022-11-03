@@ -1,9 +1,9 @@
 #pragma once
 
 #include <iostream>
-#include <Form.hpp>
+#include <AForm.hpp>
 
-class Form;
+class AForm;
 
 class	Bureaucrat {
 public:
@@ -13,13 +13,13 @@ public:
       Bureaucrat &operator=(const Bureaucrat &copy);
       ~Bureaucrat();
 
-
       std::string getName(void) const;
       int getGrade(void) const;
 
       void incrementGrade(int points);
 	void decrementGrade(int points);
-      void signForm(Form &f);
+      void signForm(AForm &f);
+      void executeForm(AForm const &f);
 
       class GradeTooHighException : public std::exception {
 	public:

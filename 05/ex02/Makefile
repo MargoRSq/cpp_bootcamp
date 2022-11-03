@@ -1,6 +1,6 @@
 include makefile.files
 
-NAME = form
+NAME = forms
 
 INCLUDES = -Iincludes
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -g

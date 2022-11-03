@@ -54,7 +54,7 @@ void Bureaucrat::decrementGrade(int points)
 
 }
 
-void Bureaucrat::signForm(Form &f) {
+void Bureaucrat::signForm(AForm &f) {
 	try
 	{
 		if (f.beSigned(*this))
@@ -67,6 +67,21 @@ void Bureaucrat::signForm(Form &f) {
 	catch(const std::exception& e)
 	{
 		std::cerr << "[SignForm] CAUGHT EXCEPTION: " << e.what() << '\n';
+		throw ;
+	}
+}
+void Bureaucrat::executeForm(AForm const & doc) {
+	try
+	{
+		if (doc.execute(*this))
+			std::cout << "Bureaucrat " << this->m_name
+					  << " executed the " << doc.getName()<< std::endl;
+		else
+			std::cout << "Bureaucrat " << this->m_name
+					  << " couldn't execute the " << doc.getName() << std::endl;
+	}
+	catch(const std::exception& e) {
+		std::cerr << "(signForm) CAUGHT EXCEPTION: " << e.what() << '\n';
 		throw ;
 	}
 }

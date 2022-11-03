@@ -41,9 +41,12 @@ bool Form::isSigned(void) const { return this->m_signed; }
 bool Form::beSigned(Bureaucrat const &bur)
 {
 	if (this->isSigned())
+	{
 		std::cout << "FORM: Bureaucrat " << bur.getName()
                   << " could not sign the form " << this->getName()
                   << " because it's already signed" << std::endl;
+		return false;
+	}
 	else if (this->m_signGrade < bur.getGrade())
     {
 		std::cout << "FORM: Bureaucrat " << bur.getName()
@@ -51,14 +54,10 @@ bool Form::beSigned(Bureaucrat const &bur)
                   << " because his grade is too low" << std::endl;
 		throw Form::GradeTooLowException();
     }
-	else
-    {
-		this->m_signed = true;
-		std::cout << "FORM: Bureaucrat " << bur.getName()
-                  << " signed the form " << this->getName() << std::endl;
-		return true;
-	}
-	return false;
+	this->m_signed = true;
+	std::cout << "FORM: Bureaucrat " << bur.getName()
+				<< " signed the form " << this->getName() << std::endl;
+	return true;
 }
 
 const char* Form::GradeTooHighException::what() const throw() {
