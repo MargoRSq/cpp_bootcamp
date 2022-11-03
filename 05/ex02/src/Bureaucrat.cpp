@@ -54,6 +54,23 @@ void Bureaucrat::decrementGrade(int points)
 
 }
 
+void Bureaucrat::signForm(Form &f) {
+	try
+	{
+		if (f.beSigned(*this))
+			std::cout << "Bureaucrat " << this->m_name
+					  << " signed the form " << f.getName() << std::endl;
+		else
+			std::cout << "Bureaucrat " << this->m_name
+					  << " could not signed the form " << f.getName() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << "[SignForm] CAUGHT EXCEPTION: " << e.what() << '\n';
+		throw ;
+	}
+}
+
 const char* Bureaucrat::GradeTooHighException::what() const throw() {
 	return ("The grade is too high!");
 }
@@ -62,7 +79,7 @@ const char* Bureaucrat::GradeTooLowException::what() const throw() {
 	return ("The grade is too low!");
 }
 
-std::ostream & operator<<(std::ostream &o, Bureaucrat const &copy) {
-	o << copy.getName() << ", bureaucrat grade " << copy.getGrade();
+std::ostream & operator<<(std::ostream & o, Bureaucrat const & rhs) {
+	o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade();
 	return o;
 }

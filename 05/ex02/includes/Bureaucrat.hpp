@@ -1,6 +1,9 @@
 #pragma once
 
 #include <iostream>
+#include <Form.hpp>
+
+class Form;
 
 class	Bureaucrat {
 public:
@@ -16,6 +19,7 @@ public:
 
       void incrementGrade(int points);
 	void decrementGrade(int points);
+      void signForm(Form &f);
 
       class GradeTooHighException : public std::exception {
 	public:
@@ -31,4 +35,4 @@ private:
       int m_grade;
 };
 
-std::ostream &operator<<(std::ostream &o, Bureaucrat const &copy);
+std::ostream &operator<<(std::ostream &o, Bureaucrat const &rhs);
