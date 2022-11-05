@@ -1,31 +1,40 @@
-#include "Animal.hpp"
-#include "Dog.hpp"
-#include "Cat.hpp"
+#include <iostream>
+#include <iomanip>
+#include "Serialize.hpp"
 
-int main()
-{
-	Cat cat;
-	Dog* dog = new Dog;
+int main(void) {
+	Data		*cat = new Data;
+	uintptr_t	raw;
 
-	cat.getBrain()->addIdea("How to ruin the furniture");
-	cat.getBrain()->addIdea("How to eat something");
-	std::cout << cat.getBrain()->getIdeas()[0] << std::endl;
-	std::cout << cat.getBrain()->getIdeas()[1] << std::endl;
-	std::cout << cat.getBrain()->getIdeas()[84] << std::endl;
+	std::cout << "--- Create " << std::endl;
+	cat->name = "Sam";
+	cat->type = "cat";
+	cat->age = 4;
 
-	dog->getBrain()->addIdea("How to eat owner");
-	std::cout << dog->getBrain()->getIdeas()[0] << std::endl;
-	std::cout << dog->getBrain()->getIdeas()[1] << std::endl;
-	std::cout << dog->getBrain()->getIdeas()[54] << std::endl;
+	std::cout	<< "ptr: " << cat << std::endl;
+	std::cout	<< cat->name << " is a " << cat->type
+				<< " he is " << cat->age << " years old." << std::endl;
+
+	std::cout << "--- Serialize " << std::endl;
+	raw = serialize(cat);
+	std::cout	<< "raw: " << raw << "["
+				<< std::hex << raw << std::dec << "]" << std::endl;
+	// std::cout	<< raw->name << " is a " << raw->type
+	// 			<< " he is " << raw->age << " years old." << std::endl;
+	std::cout	<< reinterpret_cast<Data *>(raw)->name << " is a " << reinterpret_cast<Data *>(raw)->type
+				<< " he is " << reinterpret_cast<Data *>(raw)->age << " years old." << std::endl;
+
+	std::cout << "--- Deserialize " << std::endl;
+	Data *dog = deserialize(raw);
+	std::cout	<< "ptr: " << dog << std::endl;
+	std::cout	<< dog->name << " is a " << dog->type
+				<< " he is " << dog->age << " years old." << std::endl;
+
+	std::cout << "--- Finished " << std::endl;
+	std::cout	<< "uintptr_t size = " << sizeof(raw) << std::endl;
+	std::cout	<< "Data* size = " << sizeof(cat) << std::endl;
+	std::cout	<< "Cat size = " << sizeof(*cat) << std::endl;
+
 	delete dog;
-
-	std::cout << "-- subject test --" << std::endl;
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-	j->makeSound();
-	i->makeSound();
-	delete j;//should not create a leak
-	delete i;
-	std::cout << "-- subject test --" << std::endl;
 	return 0;
 }
