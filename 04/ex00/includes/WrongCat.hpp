@@ -10,7 +10,7 @@ public:
       WrongCat &operator=(const WrongCat &copy);
       ~WrongCat();
 
-      void makeSound() const;
+      void makeSound(void) const;
 
 private:
 

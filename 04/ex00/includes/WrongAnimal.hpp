@@ -12,7 +12,7 @@ public:
       void setType(const std::string& value);
       std::string getType(void) const;
 
-      virtual void makeSound() const ;
+      void makeSound(void) const ;
 
 protected:
       std::string m_type;
