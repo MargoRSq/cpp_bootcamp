@@ -1,31 +1,48 @@
-#include "AAnimal.hpp"
-#include "Dog.hpp"
-#include "Cat.hpp"
+#include <iostream>
+#include <iomanip>
+#include "Base.hpp"
 
-int main()
+
+int main(void)
 {
-	Cat cat;
-	Dog* dog = new Dog;
+	{
+		Base *		a = new A();
+		Base *		b = new B();
+		Base *		c = new C();
 
-	cat.getBrain()->addIdea("How to ruin the furniture");
-	cat.getBrain()->addIdea("How to eat something");
-	std::cout << cat.getBrain()->getIdeas()[0] << std::endl;
-	std::cout << cat.getBrain()->getIdeas()[1] << std::endl;
-	std::cout << cat.getBrain()->getIdeas()[84] << std::endl;
+		std::cout << "--- Create "<< std::endl;
 
-	dog->getBrain()->addIdea("How to eat owner");
-	std::cout << dog->getBrain()->getIdeas()[0] << std::endl;
-	std::cout << dog->getBrain()->getIdeas()[1] << std::endl;
-	std::cout << dog->getBrain()->getIdeas()[54] << std::endl;
-	delete dog;
+		identify(a);
+		identify(*a);
+		identify(b);
+		identify(*b);
+		identify(c);
+		identify(*c);
 
-	std::cout << "-- subject test --" << std::endl;
-	const AAnimal* j = new Dog();
-	const AAnimal* i = new Cat();
-	j->makeSound();
-	i->makeSound();
-	delete j;//should not create a leak
-	delete i;
-	std::cout << "-- subject test --" << std::endl;
+		std::cout << "--- Destroy "<< std::endl;
+
+		delete a;
+		delete b;
+		delete c;
+	}
+	{
+		Base *		a[10];
+		std::cout << "--- Check by ptr* "<< std::endl;
+
+		for (size_t i = 0; i < 10; i++) {
+			a[i] = generate();
+			identify(a[i]);
+		}
+		std::cout << "--- Check by ref& "<< std::endl;
+		for (size_t i = 0; i < 10; i++) {
+			identify(a[i]);
+		}
+
+		std::cout << "--- Destroy "<< std::endl;
+
+		for (size_t i = 0; i < 10; i++) {
+			delete a[i];
+		}
+	}
 	return 0;
 }
