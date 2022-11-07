@@ -48,7 +48,8 @@ Array<T>::~Array() {
 }
 
 template<typename T>
-T & Array<T>::operator[](const unsigned int index) const {
+T & Array<T>::operator[](const unsigned int index) const
+{
 	if (index >= this->m_size)
 		throw std::overflow_error("Index out of bounds");
 	return this->m_arr[index];
